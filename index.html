@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackout Amor — Dia dos Namorados</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dim: #8a6e2f;
+    --green: #2d5c3f;
+    --green-light: #4a8c64;
+    --black: #0a0a0a;
+    --black-soft: #111111;
+    --black-card: #161616;
+    --white: #faf8f3;
+    --white-dim: #d6d0c0;
+    --rose: #8b1a2f;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+  /* PARTICLES */
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .heart-particle { position: absolute; opacity: 0; animation: floatHeart linear infinite; font-size: 14px; filter: blur(0.5px); }
+  @keyframes floatHeart {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* CURSOR GLOW */
+  .cursor-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events: none; transform: translate(-50%,-50%); z-index: 1; }
+
+  /* RIBBON */
+  .ribbon { background: linear-gradient(90deg, var(--green), var(--green-light), var(--gold-dim), var(--rose), var(--gold-dim), var(--green-light), var(--green)); background-size: 400% 100%; animation: ribbonMove 6s ease infinite; padding: 12px; text-align: center; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--white); position: relative; z-index: 101; }
+  @keyframes ribbonMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s; }
+  nav.scrolled { background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.1); padding: 14px 40px; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: var(--gold); text-decoration: none; }
+  .nav-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--black); padding: 10px 24px; border-radius: 100px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 24px 60px; overflow: hidden; z-index: 2; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(45,92,63,0.25) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 50% 100%, rgba(139,26,47,0.2) 0%, transparent 60%); pointer-events: none; }
+  .hero-badge { display: inline-block; border: 1px solid rgba(201,168,76,0.4); padding: 6px 20px; border-radius: 100px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; animation: fadeSlideDown 0.8s ease both; }
+  .hero-logo { font-family: 'Playfair Display', serif; font-size: clamp(64px,12vw,130px); font-weight: 900; line-height: 0.9; color: var(--white); animation: fadeSlideDown 0.9s ease both 0.1s; }
+  .hero-logo span { color: var(--gold); }
+  .hero-amor { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,7vw,80px); font-style: italic; font-weight: 300; color: var(--gold-light); line-height: 1; animation: fadeSlideDown 1s ease both 0.2s; letter-spacing: -1px; }
+  .hero-hearts { display: flex; align-items: center; gap: 12px; margin: 24px 0; animation: fadeSlideDown 1.1s ease both 0.3s; }
+  .hero-hearts .line { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim)); }
+  .hero-hearts .line.right { background: linear-gradient(90deg, var(--gold-dim), transparent); }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px,3vw,26px); font-weight: 300; color: var(--white-dim); max-width: 560px; line-height: 1.6; animation: fadeSlideDown 1.2s ease both 0.4s; }
+  .hero-cta { margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: fadeSlideDown 1.3s ease both 0.5s; }
+  .hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; animation: fadeSlideDown 1.5s ease both 1s, bob 2s ease-in-out 2s infinite; }
+  .hero-scroll span { font-size: 10px; letter-spacing: 3px; color: var(--gold-dim); text-transform: uppercase; }
+  @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* BUTTONS */
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--black); padding: 16px 36px; border-radius: 100px; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-decoration: none; transition: all 0.3s; position: relative; overflow: hidden; }
+  .btn-primary::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); border-radius: 100px; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.35); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(201,168,76,0.5); color: var(--gold); padding: 16px 36px; border-radius: 100px; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-decoration: none; transition: all 0.3s; background: transparent; cursor: pointer; }
+  .btn-secondary:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); transform: translateY(-2px); }
+
+  /* SECTION BASE */
+  section { position: relative; z-index: 2; }
+  .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); text-align: center; margin-bottom: 16px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(36px,6vw,68px); font-weight: 700; text-align: center; line-height: 1.05; color: var(--white); }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+  .section-divider { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 24px 0 60px; }
+  .section-divider .dl { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim)); }
+  .section-divider .dr { width: 60px; height: 1px; background: linear-gradient(90deg, var(--gold-dim), transparent); }
+
+  /* CASAL BANNER */
+  .casal-banner { position: relative; height: 600px; overflow: hidden; z-index: 2; }
+  .casal-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 8s ease; }
+  .casal-banner:hover img { transform: scale(1.04); }
+  .casal-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.4) 50%, rgba(10,10,10,0.15) 100%); display: flex; align-items: center; padding: 0 8%; }
+  .casal-text { max-width: 520px; }
+  .casal-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .casal-title { font-family: 'Playfair Display', serif; font-size: clamp(36px,5vw,64px); font-weight: 900; line-height: 1.05; color: var(--white); margin-bottom: 20px; }
+  .casal-title span { color: var(--gold); font-style: italic; }
+  .casal-desc { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--white-dim); line-height: 1.6; margin-bottom: 36px; }
+
+  /* PRODUCTS */
+  .products { padding: 100px 24px; background: var(--black-soft); }
+  .products-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+  .product-card { background: var(--black-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); position: relative; opacity: 0; transform: translateY(40px); }
+  .product-card.visible { opacity: 1; transform: translateY(0); }
+  .product-card:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.2); }
+  .product-badge { position: absolute; top: 16px; left: 16px; z-index: 3; background: var(--gold); color: var(--black); font-size: 11px; font-weight: 500; letter-spacing: 1px; padding: 4px 12px; border-radius: 100px; }
+  .product-badge.mais-vendido { background: var(--rose); color: var(--white); }
+  .product-badge.novo { background: var(--green); color: var(--white); }
+  .product-img-wrap { overflow: hidden; position: relative; }
+  .product-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%); pointer-events: none; }
+  .product-img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.6s ease; background: #1a1a1a; }
+  .product-card:hover .product-img { transform: scale(1.04); }
+  .product-body { padding: 24px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .product-desc { font-size: 14px; color: rgba(214,208,192,0.7); line-height: 1.6; margin-bottom: 20px; }
+  .product-price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .product-price { display: flex; flex-direction: column; }
+  .product-price-from { font-size: 12px; color: rgba(214,208,192,0.4); text-decoration: line-through; }
+  .product-price-main { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
+  .product-price-sub { font-size: 12px; color: rgba(214,208,192,0.5); }
+  .product-btn { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 22px; border-radius: 100px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; white-space: nowrap; cursor: pointer; }
+  .product-btn:hover { background: var(--gold); color: var(--black); }
+
+  /* FEATURED */
+  .featured { padding: 100px 24px; background: var(--black); overflow: hidden; }
+  .featured-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .featured-img-wrap { position: relative; border-radius: 24px; overflow: hidden; }
+  .featured-img-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--gold), var(--green), var(--rose)); border-radius: 26px; z-index: 0; }
+  .featured-img-inner { position: relative; z-index: 1; border-radius: 22px; overflow: hidden; }
+  .featured-img { width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.6s ease; }
+  .featured-img-wrap:hover .featured-img { transform: scale(1.03); }
+  .featured-text .section-label { text-align: left; }
+  .featured-text .section-title { text-align: left; font-size: clamp(32px,4vw,52px); }
+  .featured-text .section-divider { justify-content: flex-start; }
+  .featured-desc { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--white-dim); line-height: 1.7; margin-bottom: 36px; }
+  .featured-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+  .featured-feature { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--white-dim); }
+  .feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* HOW */
+  .how { padding: 100px 24px; background: var(--black-soft); }
+  .steps { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+  .step { text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+  .step.visible { opacity: 1; transform: translateY(0); }
+  .step-num { width: 64px; height: 64px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--gold); transition: all 0.3s; }
+  .step:hover .step-num { background: rgba(201,168,76,0.1); border-color: var(--gold); box-shadow: 0 0 30px rgba(201,168,76,0.2); }
+  .step-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+  .step-desc { font-size: 14px; color: rgba(214,208,192,0.6); line-height: 1.6; }
+
+  /* BANNER QUOTE */
+  .banner { padding: 100px 24px; background: var(--black); text-align: center; position: relative; overflow: hidden; }
+  .banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45,92,63,0.2) 0%, transparent 70%); }
+  .banner-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .banner-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,5vw,52px); font-style: italic; font-weight: 400; color: var(--gold-light); line-height: 1.3; margin-bottom: 20px; }
+  .banner-author { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(214,208,192,0.4); }
+
+  /* CTA */
+  .cta { padding: 120px 24px; background: var(--black); text-align: center; position: relative; overflow: hidden; }
+  .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(139,26,47,0.15) 0%, transparent 65%); }
+  .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+  .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(40px,7vw,80px); font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 20px; }
+  .cta-title span { color: var(--gold); display: block; font-style: italic; }
+  .cta-sub { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--white-dim); margin-bottom: 48px; line-height: 1.5; }
+  .whats-btn { display: inline-flex; align-items: center; gap: 14px; background: #25D366; color: #fff; padding: 20px 48px; border-radius: 100px; font-size: 16px; font-weight: 500; text-decoration: none; transition: all 0.3s; position: relative; overflow: hidden; letter-spacing: 0.5px; }
+  .whats-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent); border-radius: 100px; }
+  .whats-btn:hover { background: #1fbd59; transform: translateY(-3px); box-shadow: 0 16px 48px rgba(37,211,102,0.4); }
+  .cta-note { margin-top: 20px; font-size: 13px; color: rgba(214,208,192,0.35); }
+
+  /* FOOTER */
+  footer { background: var(--black-card); border-top: 1px solid rgba(201,168,76,0.15); padding: 40px 24px; text-align: center; position: relative; z-index: 2; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
+  .footer-sub { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: rgba(214,208,192,0.3); margin-bottom: 20px; }
+  .footer-copy { font-size: 13px; color: rgba(214,208,192,0.25); }
+
+  /* ANIMATIONS */
+  @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+  .pulse { animation: pulse 2s ease-in-out infinite; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .featured-inner { grid-template-columns: 1fr; gap: 40px; }
+    .featured-img { height: 320px; }
+    nav { padding: 16px 20px; }
+    nav.scrolled { padding: 12px 20px; }
+    .casal-banner { height: 500px; }
+    .casal-overlay { padding: 0 6%; background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 60%); align-items: flex-end; padding-bottom: 48px; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<div id="particles"></div>
+
+<!-- RIBBON -->
+<div class="ribbon">💛 Dia dos Namorados — Surpreenda com estilo e amor — Frete para todo o Brasil 💛</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Blackout</a>
+  <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20presentes%20de%20Dia%20dos%20Namorados!" class="nav-cta" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Pedir agora
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-badge">✦ Dia dos Namorados 2025 ✦</span>
+  <h1 class="hero-logo">BLACKOUT<br><span>AMOR</span></h1>
+  <p class="hero-amor">Presentes que emocionam</p>
+  <div class="hero-hearts">
+    <div class="line"></div>
+    <svg viewBox="0 0 32 30" fill="none" width="28" height="28" class="pulse">
+      <path d="M16 27S2 18 2 9a7 7 0 0114 0 7 7 0 0114 0c0 9-14 18-14 18z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.5"/>
+    </svg>
+    <div class="line right"></div>
+  </div>
+  <p class="hero-sub">Presenteie quem você ama com exclusividade, charme e muito carinho. Cada detalhe pensado para tornar este momento inesquecível.</p>
+  <div class="hero-cta">
+    <a href="#produtos" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+      Ver presentes
+    </a>
+    <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20presentes%20de%20Dia%20dos%20Namorados!" class="btn-secondary" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Falar conosco
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#8a6e2f" stroke-width="1.5" width="20" height="20"><path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- CASAL BANNER -->
+<div class="casal-banner">
+  <img src="casal.jpeg" alt="Casal recebendo presente Blackout" id="casalImg">
+  <div class="casal-overlay">
+    <div class="casal-text reveal">
+      <p class="casal-eyebrow">✦ A reação que você quer provocar ✦</p>
+      <h2 class="casal-title">Um presente<br>que ela nunca<br><span>vai esquecer</span></h2>
+      <p class="casal-desc">Veja a emoção acontecer de verdade. Cada detalhe da Blackout foi criado para esse momento.</p>
+      <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20encomendas%20para%20o%20Dia%20dos%20Namorados!" class="btn-primary" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Quero esse momento
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products" id="produtos">
+  <div class="reveal">
+    <p class="section-label">✦ Coleção exclusiva ✦</p>
+    <h2 class="section-title">Presentes que <em>encantam</em></h2>
+    <div class="section-divider">
+      <div class="dl"></div>
+      <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.2"/></svg>
+      <div class="dr"></div>
+    </div>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Quebra-cabeça -->
+    <div class="product-card" data-delay="0">
+      <span class="product-badge mais-vendido">Mais vendido</span>
+      <div class="product-img-wrap">
+        <img src="quebra-cabeca.jpeg" alt="Quebra-cabeça personalizado Blackout Amor" class="product-img">
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Quebra-cabeça Personalizado</h3>
+        <p class="product-desc">Monte a história de vocês peça por peça. Colagem de fotos com a identidade BlackoutAmor em fundo preto elegante. Emoção garantida na montagem.</p>
+        <div class="product-price-row">
+          <div class="product-price">
+            <span class="product-price-from">R$ 149,90</span>
+            <span class="product-price-main">R$ 119,90</span>
+            <span class="product-price-sub">Frete incluso</span>
+          </div>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Quebra-cabeça%20Personalizado!" class="product-btn" target="_blank">Pedir ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caixa de trufas -->
+    <div class="product-card" data-delay="100">
+      <span class="product-badge">Exclusivo</span>
+      <div class="product-img-wrap">
+        <img src="caixa_de_trufa.jpeg" alt="Caixa de trufas gourmet Blackout Sabores do Amor" class="product-img">
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Caixa Sabores do Amor</h3>
+        <p class="product-desc">Chaveiro personalizado "Amor Absoluto" + barra artesanal Blackout com framboesas e folhas de ouro. Embalagem premium com toque especial.</p>
+        <div class="product-price-row">
+          <div class="product-price">
+            <span class="product-price-from">R$ 189,90</span>
+            <span class="product-price-main">R$ 149,90</span>
+            <span class="product-price-sub">Com chaveiro incluso</span>
+          </div>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20a%20Caixa%20Sabores%20do%20Amor!" class="product-btn" target="_blank">Pedir ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartão -->
+    <div class="product-card" data-delay="200">
+      <div class="product-img-wrap">
+        <img src="cartao.jpeg" alt="Cartão Para Sempre Juntos com lacre dourado" class="product-img">
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Cartão "Para Sempre Juntos"</h3>
+        <p class="product-desc">Envelope preto lacrado com cera e cartão em papel especial dourado. Pote de chocolates "Energia para o Amor" incluso. Um clássico elegantíssimo.</p>
+        <div class="product-price-row">
+          <div class="product-price">
+            <span class="product-price-from">R$ 89,90</span>
+            <span class="product-price-main">R$ 69,90</span>
+            <span class="product-price-sub">Com chocolates incluso</span>
+          </div>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Cartão%20Para%20Sempre%20Juntos!" class="product-btn" target="_blank">Pedir ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caneca -->
+    <div class="product-card" data-delay="0">
+      <span class="product-badge mais-vendido">Favorita</span>
+      <div class="product-img-wrap">
+        <img src="caneca.jpeg" alt="Caneca LOVE personalizada com chocolates em formato de coração" class="product-img">
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Caneca LOVE Personalizada</h3>
+        <p class="product-desc">Caneca preta com "LOVE" em degradê verde-dourado e nome do casal. Vem recheada de coraçõezinhos de chocolate branco. Um presente completo!</p>
+        <div class="product-price-row">
+          <div class="product-price">
+            <span class="product-price-from">R$ 139,90</span>
+            <span class="product-price-main">R$ 109,90</span>
+            <span class="product-price-sub">Com chocolates</span>
+          </div>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20a%20Caneca%20LOVE%20Personalizada!" class="product-btn" target="_blank">Pedir ✦</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kit Completo -->
+    <div class="product-card" data-delay="100" style="background: linear-gradient(135deg, #1a1200, #161616); border-color: rgba(201,168,76,0.4); grid-column: span 2;">
+      <span class="product-badge">⭐ Melhor custo</span>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; height: 100%;">
+        <div class="product-img-wrap" style="height: 100%; min-height: 280px;">
+          <img src="kit_completo.jpeg" alt="Kit completo Blackout Amor" class="product-img" style="height: 100%;">
+        </div>
+        <div class="product-body" style="display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+          <h3 class="product-name" style="font-size: 28px; margin-bottom: 12px;">Kit Amor Completo</h3>
+          <p class="product-desc" style="margin-bottom: 24px;">Quebra-cabeça + Caneca LOVE + Cartão + Caixa Sabores do Amor. Tudo em uma única caixa presente Blackout. A experiência completa do amor absoluto.</p>
+          <div class="product-price-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+            <div class="product-price">
+              <span class="product-price-from">R$ 549,60</span>
+              <span class="product-price-main" style="color: var(--gold-light); font-size: 36px;">R$ 399,90</span>
+              <span class="product-price-sub">Economize R$ 149,70</span>
+            </div>
+            <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Kit%20Amor%20Completo!" class="product-btn" target="_blank" style="border-color: var(--gold-light); color: var(--gold-light);">Quero o kit completo ✦</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="featured-img-wrap reveal">
+      <div class="featured-img-inner">
+        <img src="caixa_de_trufa.jpeg" alt="Detalhe Caixa Sabores do Amor" class="featured-img">
+      </div>
+    </div>
+    <div class="featured-text reveal">
+      <p class="section-label">✦ Nossa essência ✦</p>
+      <h2 class="section-title">Amor que se<br><em>vê e se sente</em></h2>
+      <div class="section-divider" style="justify-content: flex-start;">
+        <div class="dl"></div>
+        <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.2"/></svg>
+        <div class="dr"></div>
+      </div>
+      <p class="featured-desc">Na Blackout, cada presente é elaborado com obsessão pelos detalhes. Do papel premium ao lacre de cera dourada, cada elemento conta uma história de amor que merece ser lembrada para sempre.</p>
+      <div class="featured-features">
+        <div class="featured-feature"><div class="feature-dot"></div>Embalagem premium preta e dourada</div>
+        <div class="featured-feature"><div class="feature-dot"></div>Personalização com nome e foto</div>
+        <div class="featured-feature"><div class="feature-dot"></div>Chocolates gourmet artesanais</div>
+        <div class="featured-feature"><div class="feature-dot"></div>Entrega em todo o Brasil</div>
+        <div class="featured-feature"><div class="feature-dot"></div>Prazo especial para o Dia dos Namorados</div>
+      </div>
+      <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20presentes!" class="btn-primary" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Encomendar agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="reveal">
+    <p class="section-label">✦ Simples assim ✦</p>
+    <h2 class="section-title">Como <em>funciona</em></h2>
+    <div class="section-divider">
+      <div class="dl"></div>
+      <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.2"/></svg>
+      <div class="dr"></div>
+    </div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><h3 class="step-title">Escolha o presente</h3><p class="step-desc">Navegue pelos nossos produtos exclusivos e encontre o que mais combina com o amor de vocês.</p></div>
+    <div class="step"><div class="step-num">02</div><h3 class="step-title">Fale no WhatsApp</h3><p class="step-desc">Envie suas fotos e personalizações pelo WhatsApp. Nossa equipe cuida de cada detalhe com carinho.</p></div>
+    <div class="step"><div class="step-num">03</div><h3 class="step-title">Confirmamos o pedido</h3><p class="step-desc">Receba a confirmação e acompanhe a produção. Tudo feito à mão com muito cuidado.</p></div>
+    <div class="step"><div class="step-num">04</div><h3 class="step-title">Surpreenda!</h3><p class="step-desc">Entregamos com embalagem premium onde você estiver. Prepare-se para a reação mais linda!</p></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="banner">
+  <div class="banner-inner reveal">
+    <p class="banner-quote">"O amor não se encontra onde se procura, mas onde menos se espera."</p>
+    <p class="banner-author">— BlackoutAmor ✦</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta">
+  <div class="cta-inner reveal">
+    <h2 class="cta-title">Surpreenda<span>hoje mesmo</span></h2>
+    <p class="cta-sub">Fale com a gente agora e garanta o presente perfeito para o Dia dos Namorados. Vagas limitadas!</p>
+    <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20encomendas%20para%20o%20Dia%20dos%20Namorados!%20Vi%20no%20site%20da%20Blackout%20🖤" class="whats-btn" target="_blank">
+      <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Chamar no WhatsApp · (47) 99991-2755
+    </a>
+    <p class="cta-note">Respondemos em minutos • Atendimento personalizado</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">BLACKOUT</div>
+  <p class="footer-sub">Amor Absoluto · Presentes Exclusivos</p>
+  <p class="footer-copy">© 2025 Blackout — Trikmissors & Manula Bona. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top  = e.clientY + 'px';
+});
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const colors = ['rgba(201,168,76,0.7)','rgba(139,26,47,0.7)','rgba(240,208,128,0.5)','rgba(45,92,63,0.6)'];
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'heart-particle';
+  p.innerHTML = '♥';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.color = colors[Math.floor(Math.random() * colors.length)];
+  const dur = 8 + Math.random() * 12;
+  p.style.animation = `floatHeart ${dur}s ${Math.random()*6}s linear infinite`;
+  p.style.fontSize = (10 + Math.random() * 16) + 'px';
+  document.getElementById('particles').appendChild(p);
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = entry.target.dataset.delay || 0;
+      setTimeout(() => entry.target.classList.add('visible'), +delay);
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .product-card, .step').forEach(el => obs.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const el = document.getElementById(a.getAttribute('href').slice(1));
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
