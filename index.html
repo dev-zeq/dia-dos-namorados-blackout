@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blackout Amor — Dia dos Namorados</title>
+<meta name="description" content="Presentes premium para o Dia dos Namorados. Carta-Bombom, Livro-Cartão, Quadros Decorativos, Ursinho Fofo e Varal de Fotos. Camboriú e todo o Brasil.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -18,6 +19,7 @@
     --white: #faf8f3;
     --white-dim: #d6d0c0;
     --rose: #8b1a2f;
+    --wine: #6b0f1e;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,7 +40,7 @@
   .cursor-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events: none; transform: translate(-50%,-50%); z-index: 1; }
 
   /* RIBBON */
-  .ribbon { background: linear-gradient(90deg, var(--green), var(--green-light), var(--gold-dim), var(--rose), var(--gold-dim), var(--green-light), var(--green)); background-size: 400% 100%; animation: ribbonMove 6s ease infinite; padding: 12px; text-align: center; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--white); position: fixed; top: 0; left: 0; right: 0; z-index: 101; }
+  .ribbon { background: linear-gradient(90deg, var(--wine), var(--rose), #c0404a, var(--gold-dim), var(--rose), var(--wine)); background-size: 400% 100%; animation: ribbonMove 6s ease infinite; padding: 12px; text-align: center; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--white); position: fixed; top: 0; left: 0; right: 0; z-index: 101; }
   @keyframes ribbonMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
   /* NAV */
@@ -50,7 +52,7 @@
 
   /* HERO */
   .hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 24px 60px; overflow: hidden; z-index: 2; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(45,92,63,0.25) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 50% 100%, rgba(139,26,47,0.2) 0%, transparent 60%); pointer-events: none; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(139,26,47,0.2) 0%, transparent 60%), radial-gradient(ellipse 50% 40% at 50% 100%, rgba(139,26,47,0.15) 0%, transparent 60%); pointer-events: none; }
   .hero-badge { display: inline-block; border: 1px solid rgba(201,168,76,0.4); padding: 6px 20px; border-radius: 100px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; animation: fadeSlideDown 0.8s ease both; }
   .hero-logo { font-family: 'Playfair Display', serif; font-size: clamp(64px,12vw,130px); font-weight: 900; line-height: 0.9; color: var(--white); animation: fadeSlideDown 0.9s ease both 0.1s; }
   .hero-logo span { color: var(--gold); }
@@ -63,6 +65,16 @@
   .hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; animation: fadeSlideDown 1.5s ease both 1s, bob 2s ease-in-out 2s infinite; }
   .hero-scroll span { font-size: 10px; letter-spacing: 3px; color: var(--gold-dim); text-transform: uppercase; }
   @keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* COUNTDOWN */
+  .countdown-bar { background: linear-gradient(135deg, #1a0608, #200b0d); border-top: 1px solid rgba(139,26,47,0.4); border-bottom: 1px solid rgba(139,26,47,0.4); padding: 20px 24px; text-align: center; position: relative; z-index: 2; }
+  .countdown-inner { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .countdown-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+  .countdown-timer { display: flex; gap: 12px; align-items: center; }
+  .countdown-unit { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .countdown-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--white); min-width: 44px; text-align: center; }
+  .countdown-sub { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(214,208,192,0.4); }
+  .countdown-sep { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold-dim); margin-bottom: 12px; }
 
   /* BUTTONS */
   .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--gold); color: var(--black); padding: 16px 36px; border-radius: 100px; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-decoration: none; transition: all 0.3s; position: relative; overflow: hidden; }
@@ -80,59 +92,91 @@
   .section-divider .dl { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim)); }
   .section-divider .dr { width: 60px; height: 1px; background: linear-gradient(90deg, var(--gold-dim), transparent); }
 
-  /* CASAL BANNER */
-  .casal-banner { position: relative; height: 600px; overflow: hidden; z-index: 2; }
-  .casal-banner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 8s ease; }
-  .casal-banner:hover img { transform: scale(1.04); }
-  .casal-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.7) 55%, rgba(10,10,10,0.3) 100%); display: flex; align-items: center; padding: 0 8%; }
-  .casal-text { max-width: 520px; }
-  .casal-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
-  .casal-title { font-family: 'Playfair Display', serif; font-size: clamp(36px,5vw,64px); font-weight: 900; line-height: 1.05; color: var(--white); margin-bottom: 20px; text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 4px 32px rgba(0,0,0,0.6); }
-  .casal-title span { color: var(--gold); font-style: italic; }
-  .casal-desc { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--white); line-height: 1.6; margin-bottom: 36px; text-shadow: 0 1px 12px rgba(0,0,0,0.9); }
-
   /* PRODUCTS */
   .products { padding: 100px 24px; background: var(--black-soft); }
-  .products-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
-  .product-card { background: var(--black-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); position: relative; opacity: 0; transform: translateY(40px); }
+  .products-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+
+  /* PRODUCT CARD */
+  .product-card { background: var(--black-card); border: 1px solid rgba(201,168,76,0.15); border-radius: 24px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); position: relative; opacity: 0; transform: translateY(40px); display: flex; flex-direction: column; }
   .product-card.visible { opacity: 1; transform: translateY(0); }
   .product-card:hover { border-color: rgba(201,168,76,0.5); transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.2); }
   .product-badge { position: absolute; top: 16px; left: 16px; z-index: 3; background: var(--gold); color: var(--black); font-size: 11px; font-weight: 500; letter-spacing: 1px; padding: 4px 12px; border-radius: 100px; }
-  .product-badge.mais-vendido { background: var(--rose); color: var(--white); }
-  .product-badge.novo { background: var(--green); color: var(--white); }
+  .product-badge.hot { background: var(--rose); color: var(--white); }
+  .product-badge.destaque { background: linear-gradient(135deg, var(--wine), var(--rose)); color: var(--white); }
+
+  /* IMAGE GALLERY (for products with multiple images) */
+  .product-gallery { position: relative; overflow: hidden; }
+  .product-gallery::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.65) 0%, transparent 45%); pointer-events: none; z-index: 1; }
+  .gallery-track { display: flex; transition: transform 0.4s ease; }
+  .gallery-img { width: 100%; height: 280px; object-fit: cover; flex-shrink: 0; display: block; background: #1a1a1a; }
+  .gallery-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
+  .gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.2s; border: none; padding: 0; }
+  .gallery-dot.active { background: var(--gold); width: 18px; border-radius: 3px; }
+  .gallery-arrows { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 12px; z-index: 2; pointer-events: none; }
+  .gallery-arrow { width: 30px; height: 30px; border-radius: 50%; background: rgba(10,10,10,0.6); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); display: flex; align-items: center; justify-content: center; cursor: pointer; pointer-events: all; transition: all 0.2s; opacity: 0; font-size: 12px; }
+  .product-gallery:hover .gallery-arrow { opacity: 1; }
+  .gallery-arrow:hover { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+  /* Single image */
   .product-img-wrap { overflow: hidden; position: relative; }
-  .product-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%); pointer-events: none; }
+  .product-img-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.65) 0%, transparent 45%); pointer-events: none; }
   .product-img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.6s ease; background: #1a1a1a; }
   .product-card:hover .product-img { transform: scale(1.04); }
-  .product-body { padding: 24px; }
-  .product-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
-  .product-desc { font-size: 14px; color: rgba(214,208,192,0.7); line-height: 1.6; margin-bottom: 20px; }
-  .product-price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .product-price { display: flex; flex-direction: column; }
-  .product-price-from { font-size: 12px; color: rgba(214,208,192,0.4); text-decoration: line-through; }
-  .product-price-main { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold); }
-  .product-price-sub { font-size: 12px; color: rgba(214,208,192,0.5); }
-  .product-btn { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px 22px; border-radius: 100px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; white-space: nowrap; cursor: pointer; }
-  .product-btn:hover { background: var(--gold); color: var(--black); }
 
-  /* FEATURED */
-  .featured { padding: 100px 24px; background: var(--black); overflow: hidden; }
-  .featured-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .featured-img-wrap { position: relative; border-radius: 24px; overflow: hidden; }
-  .featured-img-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--gold), var(--green), var(--rose)); border-radius: 26px; z-index: 0; }
-  .featured-img-inner { position: relative; z-index: 1; border-radius: 22px; overflow: hidden; }
-  .featured-img { width: 100%; height: 520px; object-fit: cover; display: block; transition: transform 0.6s ease; }
-  .featured-img-wrap:hover .featured-img { transform: scale(1.03); }
-  .featured-text .section-label { text-align: left; }
-  .featured-text .section-title { text-align: left; font-size: clamp(32px,4vw,52px); }
-  .featured-text .section-divider { justify-content: flex-start; }
-  .featured-desc { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--white-dim); line-height: 1.7; margin-bottom: 36px; }
-  .featured-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
-  .featured-feature { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--white-dim); }
-  .feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  /* Color swatches */
+  .color-swatches { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .color-swatch { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); cursor: pointer; transition: all 0.2s; }
+  .color-swatch:hover, .color-swatch.active { border-color: var(--gold); transform: scale(1.15); }
+  .swatch-label { font-size: 11px; color: rgba(214,208,192,0.5); letter-spacing: 1px; }
+
+  /* PRODUCT BODY */
+  .product-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; line-height: 1.2; }
+  .product-desc { font-size: 13.5px; color: rgba(214,208,192,0.68); line-height: 1.65; margin-bottom: 16px; flex: 1; }
+
+  /* Benefits chips */
+  .product-benefits { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+  .benefit-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(214,208,192,0.7); background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.18); padding: 4px 10px; border-radius: 100px; }
+  .benefit-chip svg { opacity: 0.7; }
+
+  /* Specs */
+  .product-specs { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; padding: 14px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
+  .spec-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(214,208,192,0.6); }
+  .spec-icon { color: var(--gold); font-size: 13px; }
+
+  /* Kit includes */
+  .kit-includes { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .kit-include { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: rgba(214,208,192,0.75); }
+  .kit-include-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
+
+  /* Price row */
+  .product-price-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: auto; }
+  .product-price { display: flex; flex-direction: column; }
+  .product-price-main { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: var(--gold); line-height: 1; }
+  .product-price-sub { font-size: 11px; color: rgba(214,208,192,0.4); margin-top: 3px; }
+  .product-price-badge { display: inline-block; background: rgba(139,26,47,0.35); border: 1px solid rgba(139,26,47,0.5); color: #f0a0a8; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 100px; margin-top: 4px; letter-spacing: 0.5px; }
+  .product-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--rose); border: 1px solid var(--rose); color: var(--white); padding: 13px 22px; border-radius: 100px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.3s; white-space: nowrap; cursor: pointer; }
+  .product-btn:hover { background: #a82236; border-color: #a82236; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,26,47,0.4); }
+
+  /* FEATURED PRODUCT (wide card) */
+  .product-card--wide { grid-column: 1 / -1; flex-direction: row; }
+  .product-card--wide .wide-gallery { width: 55%; flex-shrink: 0; }
+  .product-card--wide .wide-gallery .gallery-img { height: 100%; min-height: 360px; }
+  .product-card--wide .product-body { padding: 40px 36px; justify-content: center; }
+  .product-card--wide .product-name { font-size: 28px; margin-bottom: 12px; }
+  .product-card--wide .product-desc { font-size: 15px; margin-bottom: 20px; }
+
+  /* GIFT BOX highlight */
+  .gift-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)); border: 1px solid rgba(201,168,76,0.35); padding: 10px 18px; border-radius: 12px; margin-bottom: 20px; font-size: 13px; color: var(--gold-light); }
+
+  /* PHOTO VARIANTS section for livro-cartao */
+  .variant-thumbs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .variant-thumbs::-webkit-scrollbar { display: none; }
+  .variant-thumb { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; flex-shrink: 0; }
+  .variant-thumb.active, .variant-thumb:hover { border-color: var(--gold); }
 
   /* HOW */
-  .how { padding: 100px 24px; background: var(--black-soft); }
+  .how { padding: 100px 24px; background: var(--black); }
   .steps { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
   .step { text-align: center; opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
   .step.visible { opacity: 1; transform: translateY(0); }
@@ -142,8 +186,8 @@
   .step-desc { font-size: 14px; color: rgba(214,208,192,0.6); line-height: 1.6; }
 
   /* BANNER QUOTE */
-  .banner { padding: 100px 24px; background: var(--black); text-align: center; position: relative; overflow: hidden; }
-  .banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45,92,63,0.2) 0%, transparent 70%); }
+  .banner { padding: 100px 24px; background: var(--black-soft); text-align: center; position: relative; overflow: hidden; }
+  .banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(139,26,47,0.15) 0%, transparent 70%); }
   .banner-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
   .banner-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,5vw,52px); font-style: italic; font-weight: 400; color: var(--gold-light); line-height: 1.3; margin-bottom: 20px; }
   .banner-author { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: rgba(214,208,192,0.4); }
@@ -173,47 +217,30 @@
   @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
   .pulse { animation: pulse 2s ease-in-out infinite; }
 
-  /* KIT CARD */
-  .product-card--kit { background: linear-gradient(135deg, #1a1200, #161616); border-color: rgba(201,168,76,0.4); grid-column: span 2; }
-  .kit-inner { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
-  .kit-img-wrap { height: 100%; min-height: 280px; }
-  .kit-img { height: 100% !important; }
-  .kit-body { display: flex; flex-direction: column; justify-content: center; padding: 32px; }
-
   /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .product-card--wide { flex-direction: column; }
+    .product-card--wide .wide-gallery { width: 100%; }
+    .product-card--wide .wide-gallery .gallery-img { min-height: 260px; height: 260px; }
+    .product-card--wide .product-body { padding: 24px; }
+    .product-card--wide .product-name { font-size: 22px; }
+  }
   @media (max-width: 768px) {
     .ribbon { font-size: 10px; letter-spacing: 1.5px; padding: 10px 12px; }
     nav { top: 37px; padding: 14px 20px; }
     nav.scrolled { padding: 10px 20px; }
-
     .hero { padding: 120px 20px 60px; }
-
-    .casal-banner { height: 420px; }
-    .casal-overlay { padding: 0 6%; background: linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 60%); align-items: flex-end; padding-bottom: 40px; }
-
-    .products { padding: 60px 20px; }
+    .products { padding: 60px 16px; }
     .products-grid { grid-template-columns: 1fr; gap: 20px; }
-
-    /* Kit completo: no mobile vira coluna única */
-    .product-card--kit { grid-column: span 1 !important; }
-    .kit-inner { display: flex !important; flex-direction: column !important; }
-    .kit-img-wrap { height: 220px !important; min-height: unset !important; }
-    .kit-img { height: 220px !important; }
-    .kit-body { padding: 24px !important; }
-
-    .featured { padding: 60px 20px; }
-    .featured-inner { grid-template-columns: 1fr; gap: 36px; }
-    .featured-img { height: 280px; }
-
     .how { padding: 60px 20px; }
     .steps { gap: 28px; }
-
     .banner { padding: 60px 20px; }
-
     .cta { padding: 60px 20px; }
-
     .hero-cta { flex-direction: column; align-items: center; }
     .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+    .countdown-bar { padding: 16px 20px; }
+    .countdown-inner { gap: 16px; }
+    .countdown-num { font-size: 22px; }
   }
 </style>
 </head>
@@ -223,7 +250,7 @@
 <div id="particles"></div>
 
 <!-- RIBBON -->
-<div class="ribbon">💛 Dia dos Namorados — Surpreenda com estilo e amor — Frete para todo o Brasil 💛</div>
+<div class="ribbon">💕 Dia dos Namorados — Presentes que emocionam de verdade — Camboriú e Brasil 💕</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -236,13 +263,13 @@
 
 <!-- HERO -->
 <section class="hero">
-  <span class="hero-badge">✦ Dia dos Namorados 2025 ✦</span>
+  <span class="hero-badge">✦ Dia dos Namorados 2026 ✦</span>
   <h1 class="hero-logo">BLACKOUT<br><span>AMOR</span></h1>
   <p class="hero-amor">Presentes que emocionam</p>
   <div class="hero-hearts">
     <div class="line"></div>
     <svg viewBox="0 0 32 30" fill="none" width="28" height="28" class="pulse">
-      <path d="M16 27S2 18 2 9a7 7 0 0114 0 7 7 0 0114 0c0 9-14 18-14 18z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.5"/>
+      <path d="M16 27S2 18 2 9a7 7 0 0114 0 7 7 0 0114 0c0 9-14 18-14 18z" fill="rgba(139,26,47,0.4)" stroke="#C9A84C" stroke-width="1.5"/>
     </svg>
     <div class="line right"></div>
   </div>
@@ -263,19 +290,20 @@
   </div>
 </section>
 
-<!-- CASAL BANNER -->
-<div class="casal-banner">
-  <img src="casal.jpeg" alt="Casal recebendo presente Blackout" id="casalImg">
-  <div class="casal-overlay">
-    <div class="casal-text reveal">
-      <p class="casal-eyebrow">✦ A reação que você quer provocar ✦</p>
-      <h2 class="casal-title">Um presente<br>que ela nunca<br><span>vai esquecer</span></h2>
-      <p class="casal-desc">Veja a emoção acontecer de verdade. Cada detalhe da Blackout foi criado para esse momento.</p>
-      <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20encomendas%20para%20o%20Dia%20dos%20Namorados!" class="btn-primary" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Quero esse momento
-      </a>
+<!-- COUNTDOWN -->
+<div class="countdown-bar">
+  <div class="countdown-inner">
+    <span class="countdown-label">💕 Dia dos Namorados em</span>
+    <div class="countdown-timer">
+      <div class="countdown-unit"><span class="countdown-num" id="cd-days">--</span><span class="countdown-sub">dias</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-hours">--</span><span class="countdown-sub">horas</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-mins">--</span><span class="countdown-sub">min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="countdown-num" id="cd-secs">--</span><span class="countdown-sub">seg</span></div>
     </div>
+    <span class="countdown-label">Garanta o seu! ✦</span>
   </div>
 </div>
 
@@ -286,146 +314,259 @@
     <h2 class="section-title">Presentes que <em>encantam</em></h2>
     <div class="section-divider">
       <div class="dl"></div>
-      <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.2"/></svg>
+      <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(139,26,47,0.4)" stroke="#C9A84C" stroke-width="1.2"/></svg>
       <div class="dr"></div>
     </div>
   </div>
 
   <div class="products-grid">
 
-    <!-- Quebra-cabeça -->
+    <!-- ════ PRODUTO 1: CARTA-BOMBOM ════ -->
     <div class="product-card" data-delay="0">
-      <span class="product-badge mais-vendido">Mais vendido</span>
-      <div class="product-img-wrap">
-        <img src="quebra-cabeca.jpeg" alt="Quebra-cabeça personalizado Blackout Amor" class="product-img">
+      <span class="product-badge hot">❤ Romântico</span>
+      <div class="product-gallery" data-gallery="carta">
+        <div class="gallery-track" id="gallery-carta">
+          <img src="images/carta-bombom1.jpeg" alt="Carta-Bombom fechada" class="gallery-img">
+          <img src="images/carta-bombom2.jpeg" alt="Carta-Bombom aberta com carta e chocolates" class="gallery-img">
+          <img src="images/carta-bombom-criativo.jpeg" alt="Carta-Bombom detalhe criativo" class="gallery-img">
+        </div>
+        <div class="gallery-arrows">
+          <button class="gallery-arrow" onclick="galleryPrev('carta')">‹</button>
+          <button class="gallery-arrow" onclick="galleryNext('carta')">›</button>
+        </div>
+        <div class="gallery-dots" id="dots-carta">
+          <button class="gallery-dot active" onclick="galleryGo('carta',0)"></button>
+          <button class="gallery-dot" onclick="galleryGo('carta',1)"></button>
+          <button class="gallery-dot" onclick="galleryGo('carta',2)"></button>
+        </div>
       </div>
       <div class="product-body">
-        <h3 class="product-name">Quebra-cabeça Personalizado</h3>
-        <p class="product-desc">Monte a história de vocês peça por peça. Colagem de fotos com a identidade BlackoutAmor em fundo preto elegante. Emoção garantida na montagem.</p>
+        <h3 class="product-name">Carta-Bombom</h3>
+        <p class="product-desc">A declaração que ela vai guardar para sempre. Embalagem criativa em formato de bombom gigante com adesivo "Te Amo". Ao abrir, uma carta personalizada e bombons sortidos — Talento, Prestígio, Ouro Branco e Bis.</p>
+        <div class="product-benefits">
+          <span class="benefit-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+            Declaração personalizada
+          </span>
+          <span class="benefit-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            Acompanha chocolates
+          </span>
+          <span class="benefit-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+            Embalagem criativa
+          </span>
+          <span class="benefit-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v6a2 2 0 01-2 2H6a2 2 0 01-2-2v-6"/><path d="M12 3v13M12 3l-4 4M12 3l4 4"/></svg>
+            Pronto para presentear
+          </span>
+        </div>
         <div class="product-price-row">
           <div class="product-price">
-            <span class="product-price-from">R$ 149,90</span>
-            <span class="product-price-main">R$ 119,90</span>
-            <span class="product-price-sub">Frete incluso</span>
+            <span class="product-price-main">R$ 29,90</span>
+            <span class="product-price-sub">Pronto para entrega</span>
           </div>
-          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Quebra-cabeça%20Personalizado!" class="product-btn" target="_blank">Pedir ✦</a>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20a%20Carta-Bombom!%20Vi%20no%20site%20💕" class="product-btn" target="_blank">
+            Quero esse ✦
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Caixa de trufas -->
+    <!-- ════ PRODUTO 2: LIVRO-CARTÃO ════ -->
     <div class="product-card" data-delay="100">
-      <span class="product-badge">Exclusivo</span>
-      <div class="product-img-wrap">
-        <img src="caixa_de_trufa.jpeg" alt="Caixa de trufas gourmet Blackout Sabores do Amor" class="product-img">
+      <span class="product-badge">📸 + 18 Fotos</span>
+      <div class="product-gallery" data-gallery="livro">
+        <div class="gallery-track" id="gallery-livro">
+          <img src="images/livro-cartao-modelos.jpeg" alt="Livro-Cartão modelos disponíveis" class="gallery-img">
+          <img src="images/livro-cartao1.jpeg" alt="Livro-Cartão modelo 1" class="gallery-img">
+          <img src="images/livro-cartao2.jpeg" alt="Livro-Cartão modelo 2" class="gallery-img">
+          <img src="images/livro-cartao3.jpeg" alt="Livro-Cartão modelo 3" class="gallery-img">
+          <img src="images/livro-cartao4.jpeg" alt="Livro-Cartão modelo 4" class="gallery-img">
+          <img src="images/livro-cartao-pag1.jpeg" alt="Interior página 1" class="gallery-img">
+          <img src="images/livro-cartao-pag2.jpeg" alt="Interior página 2" class="gallery-img">
+        </div>
+        <div class="gallery-arrows">
+          <button class="gallery-arrow" onclick="galleryPrev('livro')">‹</button>
+          <button class="gallery-arrow" onclick="galleryNext('livro')">›</button>
+        </div>
+        <div class="gallery-dots" id="dots-livro">
+          <button class="gallery-dot active" onclick="galleryGo('livro',0)"></button>
+          <button class="gallery-dot" onclick="galleryGo('livro',1)"></button>
+          <button class="gallery-dot" onclick="galleryGo('livro',2)"></button>
+          <button class="gallery-dot" onclick="galleryGo('livro',3)"></button>
+          <button class="gallery-dot" onclick="galleryGo('livro',4)"></button>
+          <button class="gallery-dot" onclick="galleryGo('livro',5)"></button>
+          <button class="gallery-dot" onclick="galleryGo('livro',6)"></button>
+        </div>
       </div>
       <div class="product-body">
-        <h3 class="product-name">Caixa Sabores do Amor</h3>
-        <p class="product-desc">Chaveiro personalizado "Amor Absoluto" + barra artesanal Blackout com framboesas e folhas de ouro. Embalagem premium com toque especial.</p>
+        <h3 class="product-name">Livro-Cartão<br><em style="font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--gold-light); font-weight:400;">Nossa História</em></h3>
+        <p class="product-desc">Transforme os momentos de vocês em memórias eternas. Álbum tamanho A5 em papel perolizado com molduras decoradas de rosas e corações. Espaço para recados escritos à mão e 18 fotos para contar a linda história de vocês.</p>
+        <div class="product-benefits">
+          <span class="benefit-chip">📸 18 fotos inclusas</span>
+          <span class="benefit-chip">📖 Tamanho A5 perolizado</span>
+          <span class="benefit-chip">✍️ Espaço para recados</span>
+          <span class="benefit-chip">🎨 4 modelos de capa</span>
+        </div>
+        <div class="product-specs">
+          <div class="spec-row"><span class="spec-icon">🌸</span> Bege floral · Amarelo ursinho · Creme clássico · Flork</div>
+          <div class="spec-row"><span class="spec-icon">✨</span> Capa em papel perolizado premium</div>
+          <div class="spec-row"><span class="spec-icon">🖼️</span> Molduras decoradas com rosas e corações</div>
+        </div>
         <div class="product-price-row">
           <div class="product-price">
-            <span class="product-price-from">R$ 189,90</span>
-            <span class="product-price-main">R$ 149,90</span>
-            <span class="product-price-sub">Com chaveiro incluso</span>
+            <span class="product-price-main">R$ 29,90</span>
+            <span class="product-price-sub">Com 18 fotos inclusas</span>
           </div>
-          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20a%20Caixa%20Sabores%20do%20Amor!" class="product-btn" target="_blank">Pedir ✦</a>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Livro-Cartão%20Nossa%20História!%20Vi%20no%20site%20💕" class="product-btn" target="_blank">
+            Quero esse ✦
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Cartão -->
+    <!-- ════ PRODUTO 4: URSINHO FOFO ════ -->
     <div class="product-card" data-delay="200">
-      <div class="product-img-wrap">
-        <img src="cartao.jpeg" alt="Cartão Para Sempre Juntos com lacre dourado" class="product-img">
+      <span class="product-badge hot">🐻 Fofo demais</span>
+      <div class="product-gallery" data-gallery="ursinho">
+        <div class="gallery-track" id="gallery-ursinho">
+          <img src="images/ursinho-todas-as-cores.jpeg" alt="Ursinho fofo todas as cores" class="gallery-img">
+          <img src="images/ursinho-rosa.jpeg" alt="Ursinho rosa" class="gallery-img">
+          <img src="images/ursinho-vermelho.jpeg" alt="Ursinho vermelho" class="gallery-img">
+          <img src="images/ursinho-azul.jpeg" alt="Ursinho azul" class="gallery-img">
+          <img src="images/ursinho-bege.jpeg" alt="Ursinho bege" class="gallery-img">
+        </div>
+        <div class="gallery-arrows">
+          <button class="gallery-arrow" onclick="galleryPrev('ursinho')">‹</button>
+          <button class="gallery-arrow" onclick="galleryNext('ursinho')">›</button>
+        </div>
+        <div class="gallery-dots" id="dots-ursinho">
+          <button class="gallery-dot active" onclick="galleryGo('ursinho',0)"></button>
+          <button class="gallery-dot" onclick="galleryGo('ursinho',1)"></button>
+          <button class="gallery-dot" onclick="galleryGo('ursinho',2)"></button>
+          <button class="gallery-dot" onclick="galleryGo('ursinho',3)"></button>
+          <button class="gallery-dot" onclick="galleryGo('ursinho',4)"></button>
+        </div>
       </div>
       <div class="product-body">
-        <h3 class="product-name">Cartão "Para Sempre Juntos"</h3>
-        <p class="product-desc">Envelope preto lacrado com cera e cartão em papel especial dourado. Pote de chocolates "Energia para o Amor" incluso. Um clássico elegantíssimo.</p>
+        <h3 class="product-name">Ursinho Fofo<br><em style="font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--gold-light); font-weight:400;">com Coração de Bombons</em></h3>
+        <p class="product-desc">Ursinho com coração de acrílico transparente recheado de bombons Ouro Branco ou Sonho de Valsa, com lacre "Te Amo". Visualmente irresistível, a reação dela vai ser incrível.</p>
+        <div class="color-swatches">
+          <span class="swatch-label">Cor:</span>
+          <div class="color-swatch active" style="background:#e8a0b4;" title="Rosa" onclick="galleryGo('ursinho',1); this.parentElement.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active')"></div>
+          <div class="color-swatch" style="background:#c0392b;" title="Vermelho" onclick="galleryGo('ursinho',2); this.parentElement.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active')"></div>
+          <div class="color-swatch" style="background:#5b8fd4;" title="Azul" onclick="galleryGo('ursinho',3); this.parentElement.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active')"></div>
+          <div class="color-swatch" style="background:#d4b896;" title="Bege" onclick="galleryGo('ursinho',4); this.parentElement.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active')"></div>
+        </div>
+        <div class="product-benefits">
+          <span class="benefit-chip">🍬 Chocolates sortidos</span>
+          <span class="benefit-chip">💎 Coração em acrílico</span>
+          <span class="benefit-chip">🎀 Selo "Te Amo"</span>
+          <span class="benefit-chip">🎨 4 cores disponíveis</span>
+        </div>
         <div class="product-price-row">
           <div class="product-price">
-            <span class="product-price-from">R$ 89,90</span>
-            <span class="product-price-main">R$ 69,90</span>
-            <span class="product-price-sub">Com chocolates incluso</span>
+            <span class="product-price-main">R$ 29,90</span>
+            <span class="product-price-sub">Rosa · Azul · Bege · Vermelho</span>
           </div>
-          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Cartão%20Para%20Sempre%20Juntos!" class="product-btn" target="_blank">Pedir ✦</a>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Ursinho%20Fofo%20com%20Coração%20de%20Bombons!%20Vi%20no%20site%20💕" class="product-btn" target="_blank">
+            Quero esse ✦
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Caneca -->
-    <div class="product-card" data-delay="0">
-      <span class="product-badge mais-vendido">Favorita</span>
-      <div class="product-img-wrap">
-        <img src="caneca.jpeg" alt="Caneca LOVE personalizada com chocolates em formato de coração" class="product-img">
+    <!-- ════ PRODUTO 5: VARAL DE FOTOS — wide ════ -->
+    <div class="product-card product-card--wide" data-delay="0">
+      <span class="product-badge destaque">✨ Kit completo</span>
+      <div class="product-gallery wide-gallery" data-gallery="varal">
+        <div class="gallery-track" id="gallery-varal">
+          <img src="images/varal-foto3.jpeg" alt="Varal de fotos iluminado" class="gallery-img">
+          <img src="images/varal-foto4.jpeg" alt="Varal de fotos com LED" class="gallery-img">
+          <img src="images/varal-foto5.jpeg" alt="Varal de fotos Polaroid iluminado" class="gallery-img">
+          <img src="images/varal-foto1.jpeg" alt="Varal de fotos detalhe 1" class="gallery-img">
+          <img src="images/varal-foto2.jpeg" alt="Varal de fotos detalhe 2" class="gallery-img">
+        </div>
+        <div class="gallery-arrows">
+          <button class="gallery-arrow" onclick="galleryPrev('varal')">‹</button>
+          <button class="gallery-arrow" onclick="galleryNext('varal')">›</button>
+        </div>
+        <div class="gallery-dots" id="dots-varal">
+          <button class="gallery-dot active" onclick="galleryGo('varal',0)"></button>
+          <button class="gallery-dot" onclick="galleryGo('varal',1)"></button>
+          <button class="gallery-dot" onclick="galleryGo('varal',2)"></button>
+          <button class="gallery-dot" onclick="galleryGo('varal',3)"></button>
+          <button class="gallery-dot" onclick="galleryGo('varal',4)"></button>
+        </div>
       </div>
       <div class="product-body">
-        <h3 class="product-name">Caneca LOVE Personalizada</h3>
-        <p class="product-desc">Caneca preta com "LOVE" em degradê verde-dourado e nome do casal. Vem recheada de coraçõezinhos de chocolate branco. Um presente completo!</p>
+        <h3 class="product-name">Varal de Fotos Iluminado<br><em style="font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--gold-light); font-weight:400;">Kit Grandes Memórias</em></h3>
+        <p class="product-desc">Um varal encantador para eternizar os melhores momentos a dois. Fotos estilo Polaroid com iluminação suave de LED que transforma qualquer ambiente em algo especial e cheio de amor.</p>
+        <div class="kit-includes">
+          <div class="kit-include"><div class="kit-include-dot"></div><span><strong style="color:var(--white);">1 foto</strong> inteira 20×30 cm — o momento mais especial em destaque</span></div>
+          <div class="kit-include"><div class="kit-include-dot"></div><span><strong style="color:var(--white);">2 fotos</strong> tamanho 15×21 cm — para os momentos marcantes</span></div>
+          <div class="kit-include"><div class="kit-include-dot"></div><span><strong style="color:var(--white);">12 fotos</strong> 13×9 cm no estilo Polaroid — a coleção de vocês</span></div>
+          <div class="kit-include"><div class="kit-include-dot"></div><span><strong style="color:var(--white);">18 mini prendedores</strong> coloridos ou em madeira para pendurar com charme</span></div>
+          <div class="kit-include"><div class="kit-include-dot"></div><span><strong style="color:var(--white);">Fio de fada 2m</strong> — luz de LED que emociona e transforma o ambiente</span></div>
+        </div>
         <div class="product-price-row">
           <div class="product-price">
-            <span class="product-price-from">R$ 139,90</span>
-            <span class="product-price-main">R$ 109,90</span>
-            <span class="product-price-sub">Com chocolates</span>
+            <span class="product-price-main">R$ 29,90</span>
+            <span class="product-price-sub">15 fotos + prendedores + fio LED</span>
+            <span class="product-price-badge">Kit completo incluso</span>
           </div>
-          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20a%20Caneca%20LOVE%20Personalizada!" class="product-btn" target="_blank">Pedir ✦</a>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Varal%20de%20Fotos%20Iluminado!%20Vi%20no%20site%20💕" class="product-btn" target="_blank">
+            Quero esse ✦
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Kit Completo -->
-    <div class="product-card product-card--kit" data-delay="100">
-      <span class="product-badge">⭐ Melhor custo</span>
-      <div class="kit-inner">
-        <div class="product-img-wrap kit-img-wrap">
-          <img src="kit_completo.jpeg" alt="Kit completo Blackout Amor" class="product-img kit-img">
+    <!-- ════ PRODUTO 3: KIT QUADROS — wide ════ -->
+    <div class="product-card product-card--wide" data-delay="100">
+      <span class="product-badge" style="background: linear-gradient(135deg,#C9A84C,#F0D080); color:#0a0a0a;">🎁 Brinde incluso</span>
+      <div class="product-gallery wide-gallery" data-gallery="quadro">
+        <div class="gallery-track" id="gallery-quadro">
+          <img src="images/quadro.jpeg" alt="Kit 3 quadros decorativos" class="gallery-img">
+          <img src="images/quadro-criativo1.jpeg" alt="Quadro decorativo detalhe" class="gallery-img">
+          <img src="images/quadro-brinde.jpeg" alt="Brinde exclusivo caixa de presente" class="gallery-img">
         </div>
-        <div class="product-body kit-body">
-          <h3 class="product-name" style="font-size: 28px; margin-bottom: 12px;">Kit Amor Completo</h3>
-          <p class="product-desc" style="margin-bottom: 24px;">Quebra-cabeça + Caneca LOVE + Cartão + Caixa Sabores do Amor. Tudo em uma única caixa presente Blackout. A experiência completa do amor absoluto.</p>
-          <div class="product-price-row" style="flex-direction: column; align-items: flex-start; gap: 16px;">
-            <div class="product-price">
-              <span class="product-price-from">R$ 549,60</span>
-              <span class="product-price-main" style="color: var(--gold-light); font-size: 36px;">R$ 399,90</span>
-              <span class="product-price-sub">Economize R$ 149,70</span>
-            </div>
-            <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Kit%20Amor%20Completo!" class="product-btn" target="_blank" style="border-color: var(--gold-light); color: var(--gold-light);">Quero o kit completo ✦</a>
+        <div class="gallery-arrows">
+          <button class="gallery-arrow" onclick="galleryPrev('quadro')">‹</button>
+          <button class="gallery-arrow" onclick="galleryNext('quadro')">›</button>
+        </div>
+        <div class="gallery-dots" id="dots-quadro">
+          <button class="gallery-dot active" onclick="galleryGo('quadro',0)"></button>
+          <button class="gallery-dot" onclick="galleryGo('quadro',1)"></button>
+          <button class="gallery-dot" onclick="galleryGo('quadro',2)"></button>
+        </div>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Kit com 3 Quadros<br><em style="font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--gold-light); font-weight:400;">Decorativos Personalizados</em></h3>
+        <p class="product-desc">Eternize os melhores momentos com estilo. Kit premium para decorar o ambiente com muito amor — perfeito para criar uma linha do tempo de fotos ou mesclar momentos com frases e passagens românticas.</p>
+        <div class="gift-badge">
+          🎁 Inclui brinde exclusivo — caixa de presente especial para deixar o pacote completo
+        </div>
+        <div class="product-specs">
+          <div class="spec-row"><span class="spec-icon">📐</span> Tamanho 30×42 cm cada quadro (A3)</div>
+          <div class="spec-row"><span class="spec-icon">🖼️</span> Moldura premium em MDF Preto</div>
+          <div class="spec-row"><span class="spec-icon">🛡️</span> Proteção frontal em acetato — mais leve e seguro que vidro</div>
+          <div class="spec-row"><span class="spec-icon">✨</span> 3 quadros para montar sua galeria de amor</div>
+        </div>
+        <div class="product-price-row">
+          <div class="product-price">
+            <span class="product-price-main">R$ 119,90</span>
+            <span class="product-price-sub">3 quadros 30×42 cm + brinde</span>
+            <span class="product-price-badge">Brinde exclusivo incluso</span>
           </div>
+          <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20o%20Kit%20com%203%20Quadros%20Decorativos!%20Vi%20no%20site%20💕" class="product-btn" target="_blank">
+            Quero esse ✦
+          </a>
         </div>
       </div>
     </div>
 
-  </div>
-</section>
-
-<!-- FEATURED -->
-<section class="featured">
-  <div class="featured-inner">
-    <div class="featured-img-wrap reveal">
-      <div class="featured-img-inner">
-        <img src="caixa_de_trufa.jpeg" alt="Detalhe Caixa Sabores do Amor" class="featured-img">
-      </div>
-    </div>
-    <div class="featured-text reveal">
-      <p class="section-label">✦ Nossa essência ✦</p>
-      <h2 class="section-title">Amor que se<br><em>vê e se sente</em></h2>
-      <div class="section-divider" style="justify-content: flex-start;">
-        <div class="dl"></div>
-        <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.2"/></svg>
-        <div class="dr"></div>
-      </div>
-      <p class="featured-desc">Na Blackout, cada presente é elaborado com obsessão pelos detalhes. Do papel premium ao lacre de cera dourada, cada elemento conta uma história de amor que merece ser lembrada para sempre.</p>
-      <div class="featured-features">
-        <div class="featured-feature"><div class="feature-dot"></div>Embalagem premium preta e dourada</div>
-        <div class="featured-feature"><div class="feature-dot"></div>Personalização com nome e foto</div>
-        <div class="featured-feature"><div class="feature-dot"></div>Chocolates gourmet artesanais</div>
-        <div class="featured-feature"><div class="feature-dot"></div>Entrega em todo o Brasil</div>
-        <div class="featured-feature"><div class="feature-dot"></div>Prazo especial para o Dia dos Namorados</div>
-      </div>
-      <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20presentes!" class="btn-primary" target="_blank">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Encomendar agora
-      </a>
-    </div>
   </div>
 </section>
 
@@ -436,22 +577,22 @@
     <h2 class="section-title">Como <em>funciona</em></h2>
     <div class="section-divider">
       <div class="dl"></div>
-      <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(201,168,76,0.3)" stroke="#C9A84C" stroke-width="1.2"/></svg>
+      <svg viewBox="0 0 20 18" fill="none" width="18" height="18"><path d="M10 16S1 10.5 1 5.5A4.5 4.5 0 0110 5a4.5 4.5 0 019 .5C19 10.5 10 16 10 16z" fill="rgba(139,26,47,0.4)" stroke="#C9A84C" stroke-width="1.2"/></svg>
       <div class="dr"></div>
     </div>
   </div>
   <div class="steps">
-    <div class="step"><div class="step-num">01</div><h3 class="step-title">Escolha o presente</h3><p class="step-desc">Navegue pelos nossos produtos exclusivos e encontre o que mais combina com o amor de vocês.</p></div>
-    <div class="step"><div class="step-num">02</div><h3 class="step-title">Fale no WhatsApp</h3><p class="step-desc">Envie suas fotos e personalizações pelo WhatsApp. Nossa equipe cuida de cada detalhe com carinho.</p></div>
-    <div class="step"><div class="step-num">03</div><h3 class="step-title">Confirmamos o pedido</h3><p class="step-desc">Receba a confirmação e acompanhe a produção. Tudo feito à mão com muito cuidado.</p></div>
-    <div class="step"><div class="step-num">04</div><h3 class="step-title">Surpreenda!</h3><p class="step-desc">Entregamos com embalagem premium onde você estiver. Prepare-se para a reação mais linda!</p></div>
+    <div class="step"><div class="step-num">01</div><h3 class="step-title">Escolha o presente</h3><p class="step-desc">Navegue pelos nossos produtos exclusivos e escolha o que mais combina com o amor de vocês.</p></div>
+    <div class="step"><div class="step-num">02</div><h3 class="step-title">Fale no WhatsApp</h3><p class="step-desc">Envie as fotos e personalizações direto no WhatsApp. Nossa equipe cuida de cada detalhe com carinho.</p></div>
+    <div class="step"><div class="step-num">03</div><h3 class="step-title">Confirmamos o pedido</h3><p class="step-desc">Receba a confirmação e acompanhe a produção. Tudo feito com cuidado e atenção aos detalhes.</p></div>
+    <div class="step"><div class="step-num">04</div><h3 class="step-title">Surpreenda!</h3><p class="step-desc">Entregamos com todo cuidado onde você estiver. Prepare-se para a reação mais linda da vida!</p></div>
   </div>
 </section>
 
 <!-- QUOTE -->
 <section class="banner">
   <div class="banner-inner reveal">
-    <p class="banner-quote">"O amor não se encontra onde se procura, mas onde menos se espera."</p>
+    <p class="banner-quote">"O amor não está nas grandes gestos, mas nos detalhes que só quem ama percebe."</p>
     <p class="banner-author">— BlackoutAmor ✦</p>
   </div>
 </section>
@@ -460,8 +601,8 @@
 <section class="cta">
   <div class="cta-inner reveal">
     <h2 class="cta-title">Surpreenda<span>hoje mesmo</span></h2>
-    <p class="cta-sub">Fale com a gente agora e garanta o presente perfeito para o Dia dos Namorados. Vagas limitadas!</p>
-    <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20encomendas%20para%20o%20Dia%20dos%20Namorados!%20Vi%20no%20site%20da%20Blackout%20🖤" class="whats-btn" target="_blank">
+    <p class="cta-sub">Fale com a gente agora e garanta o presente perfeito para o Dia dos Namorados. Poucas unidades disponíveis!</p>
+    <a href="https://wa.me/5547999912755?text=Olá!%20Quero%20encomendar%20para%20o%20Dia%20dos%20Namorados!%20Vi%20no%20site%20da%20Blackout%20💕" class="whats-btn" target="_blank">
       <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.527 5.849L0 24l6.302-1.504A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.876 0-3.636-.487-5.164-1.342l-.371-.213-3.742.893.908-3.642-.235-.389A9.959 9.959 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
       Chamar no WhatsApp · (47) 99991-2755
     </a>
@@ -473,22 +614,25 @@
 <footer>
   <div class="footer-logo">BLACKOUT</div>
   <p class="footer-sub">Amor Absoluto · Presentes Exclusivos</p>
-  <p class="footer-copy">© 2025 Blackout — Trikmissors & Manula Bona. Todos os direitos reservados.</p>
+  <p class="footer-copy">© 2026 Lan Blackout — Camboriú, SC. Todos os direitos reservados.</p>
 </footer>
 
 <script>
+/* ── CURSOR GLOW ── */
 const glow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', e => {
   glow.style.left = e.clientX + 'px';
   glow.style.top  = e.clientY + 'px';
 });
 
+/* ── NAV SCROLL ── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-const colors = ['rgba(201,168,76,0.7)','rgba(139,26,47,0.7)','rgba(240,208,128,0.5)','rgba(45,92,63,0.6)'];
+/* ── PARTICLES ── */
+const colors = ['rgba(201,168,76,0.7)','rgba(139,26,47,0.7)','rgba(240,208,128,0.5)','rgba(180,60,80,0.5)'];
 for (let i = 0; i < 20; i++) {
   const p = document.createElement('div');
   p.className = 'heart-particle';
@@ -501,6 +645,7 @@ for (let i = 0; i < 20; i++) {
   document.getElementById('particles').appendChild(p);
 }
 
+/* ── INTERSECTION OBSERVER ── */
 const obs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -509,15 +654,74 @@ const obs = new IntersectionObserver(entries => {
       obs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.10 });
 document.querySelectorAll('.reveal, .product-card, .step').forEach(el => obs.observe(el));
 
+/* ── SMOOTH SCROLL ── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const el = document.getElementById(a.getAttribute('href').slice(1));
     if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
+
+/* ── GALLERY ── */
+const galleryState = {};
+
+function galleryInit(id) {
+  if (!galleryState[id]) galleryState[id] = { index: 0 };
+}
+function galleryGo(id, index) {
+  galleryInit(id);
+  const track = document.getElementById('gallery-' + id);
+  if (!track) return;
+  const total = track.children.length;
+  index = ((index % total) + total) % total;
+  galleryState[id].index = index;
+  track.style.transform = `translateX(-${index * 100}%)`;
+  const dots = document.querySelectorAll(`#dots-${id} .gallery-dot`);
+  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+}
+function galleryNext(id) {
+  galleryInit(id);
+  const track = document.getElementById('gallery-' + id);
+  if (!track) return;
+  galleryGo(id, galleryState[id].index + 1);
+}
+function galleryPrev(id) {
+  galleryInit(id);
+  const track = document.getElementById('gallery-' + id);
+  if (!track) return;
+  galleryGo(id, galleryState[id].index - 1);
+}
+
+/* Auto-advance galleries every 4s */
+['carta','livro','ursinho','varal','quadro'].forEach(id => {
+  setInterval(() => galleryNext(id), 4000 + Math.random()*1000);
+});
+
+/* ── COUNTDOWN ── */
+function updateCountdown() {
+  const target = new Date('2026-06-12T00:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) {
+    ['days','hours','mins','secs'].forEach(u => {
+      document.getElementById('cd-' + u).textContent = '00';
+    });
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 </script>
 </body>
 </html>
